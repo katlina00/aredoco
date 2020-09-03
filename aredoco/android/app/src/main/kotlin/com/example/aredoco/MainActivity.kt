@@ -1,4 +1,4 @@
-package com.petit.aredoco
+package com.example.aredoco
 
 import io.flutter.embedding.android.FlutterActivity
 
