@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1029813819021",
+    "firebase_url": "https://aredoco-app.firebaseio.com",
+    "project_id": "aredoco-app",
+    "storage_bucket": "aredoco-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029813819021:android:441953cf2f31cc1750f4c4",
+        "android_client_info": {
+          "package_name": "jp.smartapp.aredoco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029813819021-vqv5shngcn8icarte8iscdl90irb5io0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlcDJEkOTSo_wk05Kw-j9jrr2EvybZe_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029813819021-vqv5shngcn8icarte8iscdl90irb5io0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1029813819021-478os2qqaaa0vdtjcve1mo4po7neuf3c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.smartapp.aredoco"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
