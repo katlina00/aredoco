@@ -4,10 +4,10 @@ import 'package:flutter/rendering.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
-  runApp(MyApp());
+  runApp(Aredoco());
 }
 
-class MyApp extends StatelessWidget {
+class Aredoco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: aredocoHomeList(),
+      home: AredocoHomeList(),
     );
   }
 }
 
-class aredocoHomeList extends StatelessWidget{
+class AredocoHomeList extends StatelessWidget{
 
   String title = 'ホームリスト';
 
