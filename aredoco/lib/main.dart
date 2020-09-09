@@ -1,49 +1,52 @@
 import 'package:aredoco/aredoco_add_home.dart';
+import 'package:aredoco/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  //debugPaintSizeEnabled = true;
-  runApp(Aredoco());
+  //debugPaintSizeEnabled = true; //show grid
+  runApp(AredocoHomeList());
 }
 
-class Aredoco extends StatelessWidget {
+class AredocoHomeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // erase debug ribbon
       title: 'aredoco?',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: AredocoHomeList(),
-    );
-  }
-}
-
-class AredocoHomeList extends StatelessWidget{
-
-  String title = 'ホームリスト';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-       appBar: AppBar(
-        title: Text(title),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){
-          // ホーム追加用画面に遷移
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder:(context) => aredocoAddHome(),
-            )
+      home: ChangeNotifierProvider<MainModel>(
+        create: (_) => MainModel()..fetchHomeNameList(),
+        child: Consumer<MainModel>(builder: (context, model, child) {
+          final homes = model.homes;
+          final listTiles = homes
+              .map(
+                (home) => ListTile(
+                  title: Text(home.homeName),
+                ),
+              )
+              .toList();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(model.userName + model.appBarTitleParts),
+            ),
+            body: ListView(
+              children: listTiles,
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                // ホーム追加用画面に遷移
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AredocoAddHome(),
+                    ));
+              },
+              icon: Icon(Icons.add),
+              label: Text('ホームを追加する'),
+            ),
           );
-        },
-        icon:Icon(Icons.add),
-          label:Text('ホームを追加する'),
+        }),
       ),
     );
   }

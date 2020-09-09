@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class aredocoAddHome extends StatelessWidget{
+class AredocoAddHome extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
