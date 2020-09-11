@@ -1,15 +1,17 @@
 import 'package:aredoco/add_home.dart';
 import 'package:aredoco/main_model.dart';
+import 'package:aredoco/put.dart';
+import 'package:aredoco/put_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   //debugPaintSizeEnabled = true; //show grid
-  runApp(AredocoHomeList());
+  runApp(HomeList());
 }
 
-class AredocoHomeList extends StatelessWidget {
+class HomeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +25,16 @@ class AredocoHomeList extends StatelessWidget {
             final listTiles = homes
                 .map(
                   (home) => ListTile(
-                    title: Text(home.homeName),
+                    title: Text(home.homeName + ' ' + home.documentId),
+                    onTap: () async {
+                      // 片付けリスト画面に遷移
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PutList(home.documentId),
+                        ),
+                      );
+                    },
                   ),
                 )
                 .toList();
