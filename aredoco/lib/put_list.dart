@@ -1,3 +1,4 @@
+import 'package:aredoco/put_detail.dart';
 import 'package:aredoco/put_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,10 @@ import 'package:provider/provider.dart';
 import 'add_put.dart';
 
 class PutList extends StatelessWidget {
-  String homeInformationId = ''; // test
+  PutList(this.homeInformationId);
 
-  PutList(this.homeInformationId); // test
+  String homeInformationId = '';
+  String putDocumentId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,20 @@ class PutList extends StatelessWidget {
           final listTiles = puts
               .map(
                 (put) => ListTile(
-                  title: Text(put.objectName + ' ' + put.homeInformationId),
+                  title: Text(put.objectName +
+                      '-' +
+                      put.homeInformationId +
+                      '-' +
+                      put.documentId),
+                  onTap: () async {
+                    // 片付けリスト画面に遷移
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PutDetail(put.documentId),
+                      ),
+                    );
+                  },
                 ),
               )
               .toList();
@@ -37,14 +52,14 @@ class PutList extends StatelessWidget {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddPut(),
+                    builder: (context) => AddPut(homeInformationId),
                     fullscreenDialog: true,
                   ),
                 );
                 model.fetchPutList();
               },
               icon: Icon(Icons.add),
-              label: Text('片付けリストを追加する'),
+              label: Text('品目を追加する'),
             ),
           );
         },

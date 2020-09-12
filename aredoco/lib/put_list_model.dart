@@ -14,10 +14,11 @@ class PutListModel extends ChangeNotifier {
         .where('home_information_id', isEqualTo: homeInformationId)
         .getDocuments();
     final putList = docs.documents
-        .map((doc) => Put(doc['home_information_id'], doc['object_name']))
+        .map((doc) =>
+            Put(doc['home_information_id'], doc['object_name'], doc.documentID))
         .toList();
     this.puts = putList;
 
-    final docIdList = notifyListeners();
+    notifyListeners();
   }
 }
