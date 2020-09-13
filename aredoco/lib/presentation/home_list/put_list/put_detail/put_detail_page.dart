@@ -1,15 +1,13 @@
-import 'package:aredoco/put_detail_model.dart';
-import 'package:aredoco/put_list_model.dart';
+import 'package:aredoco/presentation/home_list/put_list/put_detail/put_detail_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'add_put.dart';
-
-class PutDetail extends StatelessWidget {
-  PutDetail(this.putDocumentId);
+class PutDetailPage extends StatelessWidget {
+  PutDetailPage(this.putDocumentId, this.objectName);
 
   String putDocumentId = '';
+  String objectName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,7 @@ class PutDetail extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('片付けの詳細'),
+              title: Text(objectName + 'の片付け場所の詳細'),
             ),
             body: Text(model.doc.toString()),
             floatingActionButton: FloatingActionButton.extended(
@@ -34,8 +32,8 @@ class PutDetail extends StatelessWidget {
                 );
                 model.fetchPutDetail();
               },
-              icon: Icon(Icons.add),
-              label: Text('品目を追加する'),
+              icon: Icon(Icons.edit),
+              label: Text('編集'),
             ),
           );
         },

@@ -4,6 +4,7 @@ class Put {
   Put.detail(this.homeInformationId, this.objectName, this.category);
 
   String homeInformationId;
+  String homeName;
   String objectName;
   String category;
   int floor;

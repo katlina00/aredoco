@@ -1,4 +1,3 @@
-import 'package:aredoco/put.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,13 +8,15 @@ class PutDetailModel extends ChangeNotifier {
   String category = '';
   int floor = 0;
   String detailInformation = '';
-  var doc;
+  var doc = null;
 
   Future fetchPutDetail() async {
-    doc = await Firestore.instance
+    DocumentSnapshot doc = await Firestore.instance
         .collection('put_list')
         .document(putDocumentId)
         .get();
+
+    this.doc = doc.data;
 
     notifyListeners();
   }

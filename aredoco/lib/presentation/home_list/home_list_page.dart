@@ -1,25 +1,23 @@
-import 'package:aredoco/add_home.dart';
-import 'package:aredoco/main_model.dart';
-import 'package:aredoco/put.dart';
-import 'package:aredoco/put_list.dart';
+import 'package:aredoco/presentation/home_list/put_list/put_list_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  //debugPaintSizeEnabled = true; //show grid
-  runApp(HomeList());
-}
+import 'add_home/add_home_page.dart';
+import 'home_list_model.dart';
 
-class HomeList extends StatelessWidget {
+class HomeListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // erase debug ribbon
       title: 'aredoco?',
-      home: ChangeNotifierProvider<MainModel>(
-        create: (_) => MainModel()..fetchHomeNameList(),
-        child: Consumer<MainModel>(
+      home: ChangeNotifierProvider<HomelistModel>(
+        create: (_) => HomelistModel()
+          ..fetchHomeNameList()
+          ..fetchUserName()
+          ..fetchUserEmailAddress(),
+        child: Consumer<HomelistModel>(
           builder: (context, model, child) {
             final homes = model.homes;
             final listTiles = homes
@@ -31,7 +29,7 @@ class HomeList extends StatelessWidget {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PutList(home.documentId),
+                          builder: (context) => PutListPage(home.documentId, home.homeName),
                         ),
                       );
                     },
@@ -40,7 +38,7 @@ class HomeList extends StatelessWidget {
                 .toList();
             return Scaffold(
               appBar: AppBar(
-                title: Text(model.userName + model.appBarTitleParts),
+                title: Text(model.userName + 'さんのホーム一覧'),
               ),
               body: ListView(
                 children: listTiles,
@@ -51,7 +49,7 @@ class HomeList extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddHome(),
+                      builder: (context) => AddHomePage(model.eMailAddress),
                       fullscreenDialog: true,
                     ),
                   );
