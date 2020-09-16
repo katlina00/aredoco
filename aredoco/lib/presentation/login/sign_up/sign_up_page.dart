@@ -24,7 +24,7 @@ class SignUpPage extends StatelessWidget {
                     child: TextFormField(
                       controller: mailController,
                       onChanged: (text) {
-                        model.emailAddress = text;
+                        model.eMailAddress = text;
                       },
                       enabled: true,
                       maxLength: 100,

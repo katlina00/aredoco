@@ -4,12 +4,14 @@ import 'package:provider/provider.dart';
 import 'add_home_model.dart';
 
 class AddHomePage extends StatelessWidget {
-  AddHomePage(this.emailAddress);
-  String emailAddress = '';
+  String eMailAddress;
+
+  AddHomePage(this.eMailAddress);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AddHomeModel>(
-      create: (_) => AddHomeModel(emailAddress),
+      create: (_) => AddHomeModel(eMailAddress),
       child: Scaffold(
         appBar: AppBar(
           title: Text('新しいホームの追加'),
@@ -34,7 +36,7 @@ class AddHomePage extends StatelessWidget {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         icon: Icon(Icons.home),
-                        hintText: '例：もふもふホーム',
+                        hintText: '例：サンプルホーム',
                         labelText: 'ホーム名 *',
                       ),
                     ),

@@ -7,23 +7,20 @@ import 'package:provider/provider.dart';
 import 'add_put/add_put_page.dart';
 
 class PutListPage extends StatelessWidget {
-  PutListPage(this.homeInformationId, this.homeName);
-
-  String homeInformationId = '';
-  String putDocumentId = '';
+  PutListPage(this.homeName);
   String homeName = '';
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<PutListModel>(
-      create: (_) => PutListModel(homeInformationId, homeName)..fetchPutList(),
+      create: (_) => PutListModel()..fetchPutList(),
       child: Consumer<PutListModel>(
         builder: (context, model, child) {
           final puts = model.puts;
           final listTiles = puts
               .map(
                 (put) => ListTile(
-                  title: Text(put.objectName + '-' + put.homeInformationId + '-' + put.documentId),
+                  title: Text(put.objectName.toString()),
                   onTap: () async {
                     // 片付けリスト画面に遷移
                     await Navigator.push(
@@ -49,7 +46,7 @@ class PutListPage extends StatelessWidget {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AddPutPage(homeInformationId),
+                    builder: (context) => AddPutPage(),
                     fullscreenDialog: true,
                   ),
                 );

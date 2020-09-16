@@ -11,13 +11,15 @@ class PutDetailModel extends ChangeNotifier {
   var doc = null;
 
   Future fetchPutDetail() async {
-    DocumentSnapshot doc = await Firestore.instance
-        .collection('put_list')
-        .document(putDocumentId)
-        .get();
+    DocumentSnapshot doc =
+        await Firestore.instance.collection('put_list').document(putDocumentId).get();
 
     this.doc = doc.data;
 
     notifyListeners();
+  }
+
+  void updateAccessCount() {
+    // todo:更新ロジック
   }
 }

@@ -7,29 +7,30 @@ import 'add_home/add_home_page.dart';
 import 'home_list_model.dart';
 
 class HomeListPage extends StatelessWidget {
+  String uid;
+  String userName;
+  String eMailAddress;
+
+  HomeListPage(this.uid, this.userName, this.eMailAddress);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // erase debug ribbon
-      title: 'aredoco?',
-      home: ChangeNotifierProvider<HomelistModel>(
-        create: (_) => HomelistModel()
-          ..fetchHomeNameList()
-          ..fetchUserName()
-          ..fetchUserEmailAddress(),
-        child: Consumer<HomelistModel>(
+      home: ChangeNotifierProvider<HomeListModel>(
+        create: (_) => HomeListModel(eMailAddress)..fetchHomeNameList(),
+        child: Consumer<HomeListModel>(
           builder: (context, model, child) {
             final homes = model.homes;
             final listTiles = homes
                 .map(
                   (home) => ListTile(
-                    title: Text(home.homeName + ' ' + home.documentId),
+                    title: Text(home.homeName),
                     onTap: () async {
                       // 片付けリスト画面に遷移
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PutListPage(home.documentId, home.homeName),
+                          builder: (context) => PutListPage(home.homeName),
                         ),
                       );
                     },
@@ -38,7 +39,7 @@ class HomeListPage extends StatelessWidget {
                 .toList();
             return Scaffold(
               appBar: AppBar(
-                title: Text(model.userName + 'さんのホーム一覧'),
+                title: Text(userName + 'さんのホーム一覧'),
               ),
               body: ListView(
                 children: listTiles,
@@ -49,7 +50,7 @@ class HomeListPage extends StatelessWidget {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddHomePage(model.eMailAddress),
+                      builder: (context) => AddHomePage(eMailAddress),
                       fullscreenDialog: true,
                     ),
                   );

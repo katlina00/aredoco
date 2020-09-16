@@ -3,18 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignUpModel extends ChangeNotifier {
-  String emailAddress = '';
+  String eMailAddress = '';
   String password = '';
   String userUid = '';
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future signUp() async {
-    if (emailAddress.isEmpty || password.isEmpty) {
+    if (eMailAddress.isEmpty || password.isEmpty) {
       throw ('メールアドレスまたはパスワードが空です');
     }
     final FirebaseUser user =
-        (await _auth.createUserWithEmailAndPassword(email: emailAddress, password: password)).user;
+        (await _auth.createUserWithEmailAndPassword(email: eMailAddress, password: password)).user;
     final email = user.email;
 
     // FirestoreのusersコレクションにドキュメントIDを指定してユーザ情報を追加

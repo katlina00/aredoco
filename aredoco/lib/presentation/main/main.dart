@@ -1,3 +1,4 @@
+import 'package:aredoco/domain/user.dart';
 import 'package:aredoco/presentation/home_list/add_home/add_home_page.dart';
 import 'package:aredoco/presentation/home_list/home_list_page.dart';
 import 'package:aredoco/presentation/home_list/put_list/put_list_page.dart';

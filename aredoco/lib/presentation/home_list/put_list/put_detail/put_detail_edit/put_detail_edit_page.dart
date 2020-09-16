@@ -1,28 +1,45 @@
+import 'package:aredoco/domain/put.dart';
+import 'package:aredoco/presentation/home_list/put_list/put_detail/put_detail_edit/put_detail_edit_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'add_put_model.dart';
+class PutDetailEditPage extends StatelessWidget {
+  PutDetailEditPage(this.objectName, this.floor, this.category, this.detailInformation);
 
-class AddPutPage extends StatelessWidget {
+  String objectName = '';
+  int floor = 0;
+  String category = '';
+  String detailInformation = '';
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<AddPutModel>(
-      create: (_) => AddPutModel(),
+    final objectNameTextEditingController = TextEditingController();
+    objectNameTextEditingController.text = objectName;
+    final floorTextEditingController = TextEditingController();
+    floorTextEditingController.text = floor.toString();
+    final categoryTextEditingController = TextEditingController();
+    categoryTextEditingController.text = category;
+    final detailInformationTextEditingController = TextEditingController();
+    detailInformationTextEditingController.text = detailInformation;
+    return ChangeNotifierProvider<PutDetailEditModel>(
+      create: (_) => PutDetailEditModel(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('新しい片付け場所の追加'),
+          title: Text('詳細の編集'),
         ),
         body: Padding(
           padding: EdgeInsets.all(20.0),
-          child: Consumer<AddPutModel>(
+          child: Consumer<PutDetailEditModel>(
             builder: (context, model, child) {
               return Column(
                 children: <Widget>[
-                  // ホーム名
+                  // 品目名
                   Container(
                     child: TextFormField(
+                      controller: objectNameTextEditingController,
                       onChanged: (text) {
-                        model.objectName = text;
+                        //todo
                       },
                       enabled: true,
                       maxLength: 50,
@@ -31,7 +48,7 @@ class AddPutPage extends StatelessWidget {
                       obscureText: false,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        icon: Icon(Icons.block),
+                        icon: Icon(Icons.home),
                         hintText: '例：ガムテープ',
                         labelText: '品目名 *',
                       ),
@@ -40,8 +57,9 @@ class AddPutPage extends StatelessWidget {
                   // フロア情報
                   Container(
                     child: TextFormField(
+                      controller: floorTextEditingController,
                       onChanged: (text) {
-                        model.floor = text as int;
+                        //todo
                       },
                       enabled: true,
                       maxLength: 3,
@@ -50,8 +68,8 @@ class AddPutPage extends StatelessWidget {
                       obscureText: false,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        icon: Icon(Icons.block),
-                        hintText: '1',
+                        icon: Icon(Icons.home),
+                        hintText: '例：1',
                         labelText: 'フロア(階)',
                       ),
                     ),
@@ -59,8 +77,9 @@ class AddPutPage extends StatelessWidget {
                   // カテゴリ
                   Container(
                     child: TextFormField(
+                      controller: categoryTextEditingController,
                       onChanged: (text) {
-                        model.category = text;
+                        //todo
                       },
                       enabled: true,
                       maxLength: 50,
@@ -69,17 +88,18 @@ class AddPutPage extends StatelessWidget {
                       obscureText: false,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        icon: Icon(Icons.block),
-                        hintText: '例：キッチン用品',
+                        icon: Icon(Icons.home),
+                        hintText: '例：キッチン',
                         labelText: 'カテゴリ',
                       ),
                     ),
                   ),
-                  // 詳細欄
+                  // 詳細
                   Container(
                     child: TextFormField(
+                      controller: detailInformationTextEditingController,
                       onChanged: (text) {
-                        model.detailInformation = text;
+                        //todo
                       },
                       enabled: true,
                       maxLength: 100,
@@ -88,8 +108,8 @@ class AddPutPage extends StatelessWidget {
                       obscureText: false,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        icon: Icon(Icons.block),
-                        hintText: '例：上から二番目の引き出し左奥',
+                        icon: Icon(Icons.home),
+                        hintText: '例：二番目の戸棚左奥',
                         labelText: '詳細',
                       ),
                     ),
@@ -97,10 +117,9 @@ class AddPutPage extends StatelessWidget {
                   // 追加ボタン
                   Container(
                     child: RaisedButton(
-                      child: Text('追加'),
+                      child: Text('保存'),
                       onPressed: () async {
                         try {
-                          await model.addPutDetailDataBase();
                           await showDialog(
                             context: context,
                             builder: (BuildContext context) {
@@ -120,25 +139,26 @@ class AddPutPage extends StatelessWidget {
                           Navigator.of(context).pop();
                         } catch (e) {
                           showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text(e.toString()),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child: Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(e.toString()),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('OK'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              });
                         }
                       },
                     ),
                   ),
+                  // 権限設定領域
+                  Container(),
                 ],
               );
             },

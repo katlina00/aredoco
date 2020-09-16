@@ -3,22 +3,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class PutListModel extends ChangeNotifier {
-  PutListModel(this.homeInformationId, this.homeName);
-
   List<Put> puts = [];
-  String homeInformationId = '';
-  String homeName;
 
   Future fetchPutList() async {
     final docs = await Firestore.instance
         .collection('put_list')
-        .where('home_information_id', isEqualTo: homeInformationId)
-        .getDocuments();
-    final putList = docs.documents
-        .map((doc) => Put(doc['home_information_id'], doc['object_name'], doc.documentID))
+        .getDocuments(); //.where('home_information_id', isEqualTo: homeInformationId)
+    final puts = docs.documents
+        .map((doc) => Put(
+              doc.documentID,
+              doc['home_information_id'],
+              doc['picture_path'],
+              doc['object_name'],
+              doc['category'],
+              doc['floor'],
+              doc['detail_information'],
+              doc['access_count'],
+              doc['last_update_user_id'],
+              doc['last_update_user_name'],
+              doc['last_update_date_time'],
+            ))
         .toList();
-    this.puts = putList;
 
+    this.puts = puts;
     notifyListeners();
   }
 }

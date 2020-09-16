@@ -1,3 +1,4 @@
+import 'package:aredoco/presentation/aredoco/aredoco.dart';
 import 'package:aredoco/presentation/home_list/home_list_page.dart';
 import 'package:aredoco/presentation/login/sign_up/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
                     child: TextFormField(
                       controller: mailController,
                       onChanged: (text) {
-                        model.mailAddress = text;
+                        model.eMailAddress = text;
                       },
                       enabled: true,
                       maxLength: 100,
@@ -82,7 +83,7 @@ class LoginPage extends StatelessWidget {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => HomeListPage(),
+                                          builder: (context) => Aredoco(),
                                           fullscreenDialog: true,
                                         ),
                                       );
