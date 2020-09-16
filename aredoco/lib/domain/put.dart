@@ -1,6 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Put {
+  String homeInformationId;
+  String objectName;
+  String category;
+  int floor;
+  String detailInformation;
+  String picturePath;
+  int accessCount;
+  String lastUpdateUserId;
+  String lastUpdateUserName;
+  Timestamp lastUpdateDateTime;
+  String documentId;
+  
   Put(
     this.documentId,
     this.homeInformationId,
@@ -31,15 +43,5 @@ class Put {
   }
   */
 
-  String homeInformationId;
-  String objectName;
-  String category;
-  int floor;
-  String detailInformation;
-  String picturePath;
-  int accessCount;
-  String lastUpdateUserId;
-  String lastUpdateUserName;
-  Timestamp lastUpdateDateTime;
-  String documentId;
+
 }
