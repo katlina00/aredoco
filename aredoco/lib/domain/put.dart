@@ -12,7 +12,7 @@ class Put {
   String lastUpdateUserName;
   Timestamp lastUpdateDateTime;
   String documentId;
-  
+
   Put(
     this.documentId,
     this.homeInformationId,

@@ -10,7 +10,7 @@ class HomeListModel extends ChangeNotifier {
   HomeListModel(this.eMailAddress);
 
   Future fetchHomeNameList() async {
-    debugPrint('homeName= ' + homeName + '　　　eMailAddress= ' + eMailAddress);
+    debugPrint('fetchHomeNameList()_start ' + 'eMailAddress= ' + eMailAddress);
     final docs = await Firestore.instance
         .collection('home_information')
         .where('email_address', isEqualTo: eMailAddress) // Eメールアドレス（アクセスキー情報）が合致する条件のみ取得する
@@ -18,6 +18,8 @@ class HomeListModel extends ChangeNotifier {
     final homes =
         docs.documents.map((doc) => Home(doc['home_name'], doc.documentID, eMailAddress)).toList();
     this.homes = homes;
+
+    debugPrint('fetchHomeNameList()_end ' + 'eMailAddress= ' + eMailAddress);
 
     notifyListeners();
   }

@@ -7,19 +7,18 @@ import 'package:provider/provider.dart';
 import 'aredoco_model.dart';
 
 class Aredoco extends StatelessWidget {
+  AredocoModel model = AredocoModel();
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true, // erase debug ribbon
-      title: 'aredoco?',
-      home: ChangeNotifierProvider<AredocoModel>(
-        create: (_) => AredocoModel()..fetchUserData(),
-        child: Consumer<AredocoModel>(
-          builder: (context, model, child) {
-            return HomeListPage(model.uid, model.userName, model.eMailAddress);
-          },
-        ),
-      ),
+    return FutureBuilder(
+      future: model.fetchUserData(),
+    builder: (context,snapshot){
+      if(snapshot.hasData){
+        return HomeListPage(model.uid,model.userName,model.eMailAddress);
+      }else{
+        return Center(child: CircularProgressIndicator());
+      }
+    },
     );
   }
 }

@@ -3,19 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 
-class AredocoModel extends ChangeNotifier {
+class AredocoModel  {
   String eMailAddress = '';
   String userName = '';
   String uid = '';
 
-  Future fetchUserData() async {
+Future<bool> fetchUserData() async {
+  debugPrint('fetchUserData()_start ' +'uid= ' + uid +'userName= ' + userName + '/' + 'eMailAddress= ' + eMailAddress);
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
     uid = user.uid; // UID取得
 
     var userData = await Firestore.instance.collection('users').document(uid).get();
     userName = userData.data['user_name']; // ユーザ名取得
     eMailAddress = userData.data['email_address']; // メールアドレス取得
-    debugPrint('userName= ' + userName + '　　　eMailAddress= ' + eMailAddress);
-    notifyListeners();
+
+  debugPrint('fetchUserData()_end ' +'uid= ' + uid +'userName= ' + userName + '/' + 'eMailAddress= ' + eMailAddress);
+  return true;
   }
 }
