@@ -25,13 +25,14 @@ class HomeListPage extends StatelessWidget {
             final listTiles = homes
                 .map(
                   (home) => ListTile(
-                    title: Text(home.homeName),
+                    title: Text(home.homeName + '/'),
                     onTap: () async {
                       // 片付けリスト画面に遷移
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PutListPage(home.homeName,home.documentId),
+                          builder: (context) =>
+                              PutListPage(home.homeName, home.documentId),
                         ),
                       );
                     },
