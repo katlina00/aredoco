@@ -1,23 +1,43 @@
+import 'package:aredoco/domain/permission.dart';
+import 'package:aredoco/domain/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 
 class AredocoModel  {
-  String eMailAddress = '';
-  String userName = '';
-  String uid = '';
+  List<Permission> permissions;
+  User userData;
+  Permission permission;
 
-Future<bool> fetchUserData() async {
-  debugPrint('fetchUserData()_start ' +'uid= ' + uid +'userName= ' + userName + '/' + 'eMailAddress= ' + eMailAddress);
-    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    uid = user.uid; // UID取得
+  Future<bool> fetchUserData() async {
+  final FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
-    var userData = await Firestore.instance.collection('users').document(uid).get();
-    userName = userData.data['user_name']; // ユーザ名取得
-    eMailAddress = userData.data['email_address']; // メールアドレス取得
+  final userDoc = await Firestore.instance.collection('users').document(user.uid).get();
 
-  debugPrint('fetchUserData()_end ' +'uid= ' + uid +'userName= ' + userName + '/' + 'eMailAddress= ' + eMailAddress);
+  userData = User(user,userDoc);
+
   return true;
   }
+
+  Future<bool> fetchUserPermissionList() async {
+    final userPermissionDocs = await Firestore.instance
+        .collection('permission_list')
+        .where('email_address', isEqualTo: userData.eMailAddress)
+        .getDocuments();
+
+    final permissions =
+    userPermissionDocs.documents.map((userPermissionDoc) => Permission(userPermissionDoc)).toList();
+
+    this.permissions = permissions;
+
+    debugPrint('fetchUserPermissionList().length= ' + permissions.length.toString());
+
+    for(int i = 0; i < permissions.length; i++){
+      debugPrint('fetchUserPermissionList()= ' + permissions[i].homeInformationId + ' / ' + permissions[i].permissionType.toString());
+    }
+
+    return true;
+  }
+
 }

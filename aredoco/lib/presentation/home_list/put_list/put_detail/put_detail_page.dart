@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PutDetailPage extends StatelessWidget {
-  PutDetailPage(this.putDocumentId, this.objectName);
+   String putDocumentId;
+  String objectName;
 
-  String putDocumentId = '';
-  String objectName = '';
+  PutDetailPage(this.putDocumentId, this.objectName);
 
   @override
   Widget build(BuildContext context) {

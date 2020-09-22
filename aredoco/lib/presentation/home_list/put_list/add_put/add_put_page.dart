@@ -4,10 +4,17 @@ import 'package:provider/provider.dart';
 import 'add_put_model.dart';
 
 class AddPutPage extends StatelessWidget {
+  String homeInformationId;
+  String userId;
+  String UserName;
+
+  AddPutPage(this.homeInformationId, this.userId, this.UserName);
+
   @override
   Widget build(BuildContext context) {
+    debugPrint('AddPutPage:' + 'homeInformationId= ' + homeInformationId);
     return ChangeNotifierProvider<AddPutModel>(
-      create: (_) => AddPutModel(),
+      create: (_) => AddPutModel(homeInformationId),
       child: Scaffold(
         appBar: AppBar(
           title: Text('新しい片付け場所の追加'),

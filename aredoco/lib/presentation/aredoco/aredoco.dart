@@ -7,14 +7,23 @@ import 'package:provider/provider.dart';
 import 'aredoco_model.dart';
 
 class Aredoco extends StatelessWidget {
-  AredocoModel model = AredocoModel();
+  AredocoModel aredocoModel = AredocoModel();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: model.fetchUserData(),
-    builder: (context,snapshot){
-      if(snapshot.hasData){
-        return HomeListPage(model.uid,model.userName,model.eMailAddress);
+      future: aredocoModel.fetchUserData(),
+    builder: (context,userDataSnapshot){
+      if(userDataSnapshot.hasData){
+        return FutureBuilder(
+          future: aredocoModel.fetchUserPermissionList(),
+          builder: (context, userPermissionSnapshot){
+            if(userPermissionSnapshot.hasData){
+              return HomeListPage(aredocoModel.userData, aredocoModel.permissions);
+            }else{
+              return Center(child: CircularProgressIndicator());
+            }
+          }
+        );
       }else{
         return Center(child: CircularProgressIndicator());
       }

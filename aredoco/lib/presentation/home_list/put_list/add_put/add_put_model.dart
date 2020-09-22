@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class AddPutModel extends ChangeNotifier {
   String picturePath = '';
-  String homeInformationId = '';
+  String homeInformationId;
   String objectName = '';
   String category = '';
   int floor = 0;
@@ -12,6 +12,8 @@ class AddPutModel extends ChangeNotifier {
   String lastUpdateUserId = '';
   String lastUpdateUserName = '';
   String lastUpdateDateTime = '';
+
+  AddPutModel(this.homeInformationId);
 
   Future addPutDetailDataBase() async {
     if (objectName.isEmpty) {

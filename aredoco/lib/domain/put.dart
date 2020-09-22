@@ -13,21 +13,7 @@ class Put {
   Timestamp lastUpdateDateTime;
   String documentId;
 
-  Put(
-    this.documentId,
-    this.homeInformationId,
-    this.picturePath,
-    this.objectName,
-    this.category,
-    this.floor,
-    this.detailInformation,
-    this.accessCount,
-    this.lastUpdateUserId,
-    this.lastUpdateUserName,
-    this.lastUpdateDateTime,
-  );
 
-  /*
   Put(DocumentSnapshot doc) {
     documentId = doc.documentID;
     homeInformationId = doc['home_information_id'];
@@ -41,7 +27,4 @@ class Put {
     lastUpdateUserName = doc['last_update_user_name'];
     lastUpdateDateTime = doc['last_update_date_time'];
   }
-  */
-
-
 }

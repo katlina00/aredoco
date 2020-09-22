@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddHomeModel extends ChangeNotifier {
-  AddHomeModel(this.eMailAddress);
+
   String homeName = '';
   String eMailAddress = '';
+
+
+  AddHomeModel(this.eMailAddress);
 
   Future addHomeDataBase() async {
     if (homeName.isEmpty) {

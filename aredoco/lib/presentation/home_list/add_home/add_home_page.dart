@@ -1,12 +1,14 @@
+import 'package:aredoco/domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'add_home_model.dart';
 
 class AddHomePage extends StatelessWidget {
-  String eMailAddress;
+  User userData;
+  String eMailAddress;//debug
 
-  AddHomePage(this.eMailAddress);
+  AddHomePage(this.userData);
 
   @override
   Widget build(BuildContext context) {
