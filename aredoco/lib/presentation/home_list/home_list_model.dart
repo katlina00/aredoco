@@ -11,7 +11,7 @@ class HomeListModel extends ChangeNotifier {
 
   Future fetchHomeNameList() async {
     List<DocumentSnapshot> docs = List(permissions.length);
-    List<Home> homes = List(permissions.length);
+    List<Home> homes = [];
 
     for (int i = 0; i < permissions.length; i++) {
       docs[i] = await Firestore.instance

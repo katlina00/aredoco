@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddHomeModel extends ChangeNotifier {
-
   String homeName = '';
   String eMailAddress = '';
-
 
   AddHomeModel(this.eMailAddress);
 
@@ -20,5 +18,7 @@ class AddHomeModel extends ChangeNotifier {
         'email_address': eMailAddress,
       },
     );
+
+    await Firestore.instance.document('permissi')
   }
 }
